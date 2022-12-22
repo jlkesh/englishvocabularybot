@@ -4,6 +4,7 @@ import dev.jlkesh.VocabularyBuilderBot;
 import dev.jlkesh.dao.UserDAO;
 import dev.jlkesh.domains.DBUser;
 import dev.jlkesh.handlers.Handler;
+import dev.jlkesh.utils.MessageUtils;
 import dev.jlkesh.utils.keyboards.MarkupUtils;
 import lombok.Getter;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -29,11 +30,13 @@ public class RegisterUserCallbackHandler implements Handler {
         var user = callbackQuery.getFrom();
         var message = callbackQuery.getMessage();
         deleteMessage(message);
-        saveUserToDatabase(message, user, callbackQuery.getData());
+
+        // saveUserToDatabase(message, user, callbackQuery.getData());
         var sendMessage = new SendMessage();
         sendMessage.setChatId(message.getChatId());
-        sendMessage.setText("Successfully registered");
-        sendMessage.setReplyMarkup(MarkupUtils.mainMenu());
+        String language = callbackQuery.getData().substring(5);
+        sendMessage.setText(MessageUtils.getTranslatedText("successfully.registered", language));
+        sendMessage.setReplyMarkup(MarkupUtils.mainMenu(language));
         bot.executeMessage(sendMessage);
     }
 

@@ -1,19 +1,15 @@
 package dev.jlkesh.handlers.callback;
 
-import dev.jlkesh.VocabularyBuilderBot;
-import dev.jlkesh.dao.UserDAO;
-import dev.jlkesh.domains.DBUser;
 import dev.jlkesh.handlers.Handler;
-import dev.jlkesh.utils.keyboards.MarkupUtils;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
-import org.telegram.telegrambots.meta.api.objects.*;
+import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
+import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.User;
 
 import java.sql.SQLException;
-import java.util.concurrent.CompletableFuture;
 
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -21,7 +17,7 @@ public class CallBackHandler implements Handler {
     @Getter
     private final static CallBackHandler instance = new CallBackHandler();
     private final Handler dailyQuizCallbackHandler = DailyQuizCallbackHandler.getInstance();
-    private final Handler userRegisterCallbackHandler = DailyQuizCallbackHandler.getInstance();
+    private final Handler userRegisterCallbackHandler = RegisterUserCallbackHandler.getInstance();
 
 
     @Override

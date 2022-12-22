@@ -81,18 +81,19 @@ public class MessageHandler implements Handler {
 
     private void startCommandHandler(Message message) throws SQLException {
         User user = message.getFrom();
+        String language = user.getLanguageCode();
         String userID = message.getChatId().toString();
         Optional<DBUser> dbUserOptional = userDAO.findById(userID);
         if (dbUserOptional.isEmpty()) {
             var sendMessage = getSendMessage(message);
             sendMessage.setText("Welcome " + user.getFirstName());
-            sendMessage.setReplyMarkup(InlineUtils.languages());
+            sendMessage.setReplyMarkup(InlineUtils.languages(language));
             bot.executeMessage(sendMessage);
             // TODO: 21/12/22  send language,set steps
         } else {
             var sendMessage = getSendMessage(message);
             sendMessage.setText("Welcome " + user.getFirstName());
-            sendMessage.setReplyMarkup(MarkupUtils.mainMenu());
+            sendMessage.setReplyMarkup(MarkupUtils.mainMenu(language));
             bot.executeMessage(sendMessage);
         }
     }

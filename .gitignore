@@ -128,3 +128,5 @@ fabric.properties
 /.idea/jarRepositories.xml
 /.idea/jpa-buddy.xml
 /.idea/misc.xml
+/.idea/git_toolbox_prj.xml
+/.idea/vcs.xml
